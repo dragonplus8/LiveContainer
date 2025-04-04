@@ -29,7 +29,17 @@ import SwiftUI
             self.urlStrToOpen = nil
         }
     }
-    
+    // Add the application(_:didFinishLaunchingWithOptions:) method here
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Ensure the window is set up before modifying its traits
+        if let window = self.window, let rootViewController = window.rootViewController {
+            // Override the horizontal size class to compact
+            rootViewController.traitOverrides.horizontalSizeClass = .compact
+        }
+        
+        // Continue with other setup if needed
+        return true
+    }
     public static func setLaunchAppFunc(handler: @escaping ((String, String?) async -> Void)){
         self.launchAppFunc = handler
         if let bundleToLaunch = self.bundleToLaunch {
